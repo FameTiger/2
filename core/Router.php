@@ -18,7 +18,13 @@ class Router
 	{
 		if(in_array($this->requestPatch, array_keys ($this->routingMap)))
 		{
-			$ClassNamespace = 'App\\Controllers\\' .$this->routingMap[$this->requestPatch] .'Controller';
+			if (strpos($this->requestPatch, '/admin') === 0)
+			{
+				$ClassNamespace = 'App\\Controllers\\Admin\\' . $this->routingMap[$this->requestPatch] . 'Controller';
+			}
+			else {
+				$ClassNamespace = 'App\\Controllers\\Home\\' . $this->routingMap[$this->requestPatch] . 'Controller';
+			}
 		}
 		else{
 			$ClassNamespace = 'App\\Controllers\\NotFoundController';

@@ -4,11 +4,9 @@ namespace Core;
 
 class Router
 {
-	protected $var = 10;
 	private $routingMap;
 	private $requestPatch;
 	
-//var_export($_server)
 
 	public function __construct() 
 	{
@@ -18,8 +16,6 @@ class Router
 	
 	public function run()
 	{
-		var_export($this->requestPatch);
-		var_export(in_array($this->requestPatch, array_keys ($this->routingMap)));
 		if(in_array($this->requestPatch, array_keys ($this->routingMap)))
 		{
 			$ClassNamespace = 'App\\Controllers\\' .$this->routingMap[$this->requestPatch] .'Controller';
@@ -28,5 +24,6 @@ class Router
 			$ClassNamespace = 'App\\Controllers\\NotFoundController';
 		}
 			$ClassObj = new $ClassNamespace(); 
+			$ClassObj->index();
 	}
 }

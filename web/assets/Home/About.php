@@ -1,2 +1,6 @@
+<?php
 
-about me
+foreach($data as $element){
+	echo '<br>'.$element;
+	
+}

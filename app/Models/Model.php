@@ -1,4 +1,8 @@
 <?php
 
-namespace 
-use App\Models\
+namespace App\Models;
+ 
+class Model 
+{
+	
+}

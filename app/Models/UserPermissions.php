@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class Gallery extends Model
+class UserPermissions extends Model
 {
-	private $atributes=[ '6','7','8'
+	private $atributes=[ '12','13','14'
 	];
 	public function getAtributes()
 	{

@@ -1,14 +1,13 @@
+<ul>
+  <li><a href="/admin/">Admin</a></li>
+  <li><a href="/admin/users">Users</a></li>
+  <li><a href="/admin/user-permissions">User Permissions</a></li>
+</ul>
 
 <ul>
-	<li> <a href = '/admin/'>Home</a>
-	<li> <a href = '/admin/users'>Users</a>
-	<li> <a href = '/admin/user-permissions'>User Permissions</a>
-	</ul>	
-		<li>/</li>
-		
-		
-<?php	
- require 'Admin/' . $page . '.php';
-?>  
+  <li><a href="/">Home</a></li>
+</ul>
 
-
+<?php
+require 'Admin/' . $page . '.php';
+?>

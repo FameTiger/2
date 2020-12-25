@@ -1,6 +1,5 @@
 <?php
 
-foreach($data as $element){
-	echo '<br>'.$element;
-	
+foreach($data as $element) {
+	echo '<br>' . $element;
 }

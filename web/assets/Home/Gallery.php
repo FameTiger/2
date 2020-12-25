@@ -1,10 +1,10 @@
 <?php
 
-foreach($data as $element){
-	echo '<br>'.$element;
-	
+foreach($data as $element) {
+	echo '<br>' . $element;
 }
- echo '<pre>
+
+echo '<pre>
 	／＞  フ
        |  _  _|
       ／`ミ _x 彡

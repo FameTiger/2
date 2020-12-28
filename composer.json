@@ -3,18 +3,21 @@
 	"type": "project",
 	"description": "test",
 	"license": "MIT",
-	
+
 	"config": {
 		"optimize-autoloader": true,
 		"prefered-install": "dist",
 		"sort-packeges": true
 	},
-	
+
 	"autoload": {
 		"psr-4": {
 			"App\\": "app/",
 			"Core\\": "core/",
 			"Components\\": "components/"
 		}
+	},
+	"require": {
+		"ext-pdo": "*"
 	}
 }

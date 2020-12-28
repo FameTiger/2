@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class Gallery extends Model
+class Index extends Model
 {
-    private $attributes = ['6', '7', '8'];
+    private $attributes = ['0', '1', '2'];
 
     public function getAttributes(): array
     {

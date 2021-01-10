@@ -24,8 +24,8 @@
 	}
 	
 	public function from($tableName){
-		$this->tableName=$tableName;
-		return $this;
+		return $this->tableName=$tableName;
+		//return $this;
 	}
 	
 	public function columns($columns){
@@ -75,10 +75,24 @@
 	
 	
 	private function prepareOrder(){
-		if(empty($this->order)){
+	if(empty($this->order)){
 			return '';
 		}
-		return ' ORDER BY '. $this->order; 
+		$result='';
+		if(is_array($this->order)){
+			foreach($this->order as $value){
+					$piece= $value;
+				if (empty($result))
+				{
+					$result = $piece;
+				}else{
+					$result .=', ' . $piece;
+				}
+			}
+		} else{
+			$result=$this->order;
+		}
+		return ' ORDER BY '. $result;
 	}
 	
 	
@@ -122,7 +136,7 @@
 	}
 	
 	
-	private function prepareColumns() ////////////Urrrrrrrrr
+	private function prepareColumns() 
 	{
 		$result='';
 		if(is_array($this->columns)){
@@ -155,9 +169,9 @@
 		if(is_array($this->joinColumns)){
 			foreach($this->joinColumns as $alias=>$value){
 				if(is_int($alias)){
-					$piece = $this->getJoinTableName().'.'. $value;
+					$piece = '`' . $this->getJoinTableName().'`.'. $value;
 				} else {
-					$piece = $this->getJoinTableName().'.'. $value . ' AS ' .$alias;
+					$piece = '`' . $this->getJoinTableName().'`.'. $value . ' AS ' .$alias;
 				}
 				if (empty($result))
 				{
@@ -222,19 +236,19 @@
 		if(empty($this->joinTableName)|| empty($this->joinOn)){
 			return'';
 		}
-		$result = ' JOIN '. $this->prepareJoinTableName().' ON ';
-		$on = '';
+		$result = ' JOIN '. $this->prepareJoinTableName();
+		$on = ' ON ';
 		foreach($this->joinOn as $column=>$joinColumn){
 			$piece=$this->getTableName().'.'. $column.'='.
 			$this->getJoinTableName().'.'. $joinColumn;
-			if(empty($on)){
-				$on=$piece;
+			if($on== ' ON '){
+				$on.=$piece;
 			}
 			else{
 				$on.=' AND '. $piece;
 			}
 		}
-		return $result.$on; //////////////////////////UURRRRRRRR
+		return $result.$on; 
 	}
 	
 	

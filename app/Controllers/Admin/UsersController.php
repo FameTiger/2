@@ -10,7 +10,7 @@ class UsersController extends Controller
     public function index()
     {
         $model = new Users();
-        $data = $model->getAttributes();
+        $data = $model->all();
         $this->generate('Admin', 'Users', $data);
     }
 }

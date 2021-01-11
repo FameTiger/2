@@ -6,7 +6,7 @@ class Connector
 {
     protected $config;
     protected $configPatch = [
-        'test' => '..app/Config/configDB.php',
+        'test' => '../app/Config/configDB.php',
     ];
 
     public function __construct(string $objName = 'test')
@@ -16,7 +16,7 @@ class Connector
         } else {
             throw new \Exception('DBName not value');
         }
-    }
+    } 
 
     public function connect()
     {
@@ -39,5 +39,28 @@ class Connector
         $dns = $this->config['driver'] . ':host=' . $this->config['host'] . ';dbname=' . $this->config['dbName'];
         return new \PDO($dns, $this->config['user'], $this->config['pass']);
     }
+	
+
+	public function query($sql)
+	{
+		return $this->connect()->query($sql);
+	}
 }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	

@@ -6,6 +6,8 @@
 	
  class Select
  {
+	protected $condition;
+	protected $type;
 	protected $tableName;
 	protected $columns='*';
 	protected $order;
@@ -13,19 +15,25 @@
 	protected $offset;
 	protected $limit;
 	protected $joinTableName;
-	protected $joinColumns='*';
+	protected $joinColumns;
 	protected $joinOn;
 	
+	public function where($condition, $type = null)
+	{
+		$this->condition = $condition;
+		$this->type = $type;
+	}
+ 
 	public function joinTable($columns, $table, $on){
 		$this->joinTableName=$table;
 		$this->joinColumns=$columns;
 		$this->joinOn=$on;
 		return $this;
 	}
-	
+	 
 	public function from($tableName){
-		return $this->tableName=$tableName;
-		//return $this;
+		$this->tableName=$tableName;
+		return $this;
 	}
 	
 	public function columns($columns){
@@ -66,6 +74,7 @@
 		$this->prepareJoinColumns().
 		' FROM ' . $this->prepareTableName().
 		$this->prepareJoinTable().
+		$this->prepareWhere().
 		$this->prepareOrder().
 		$this->prepareGroup().
 		$this->prepareOffset().
@@ -73,11 +82,25 @@
 	}
 	
 	
+	private function prepareWhere()
+	{
+		if(empty($this->condition)) {
+			return '';
+		}
+		$where = new Where($this->condition);
+		if(empty($this->type)){
+			$result = $where->where();
+		}else{
+			$result = $where->where($this->type);
+		}
+		return' WHERE '. $result;
+	}
+	
 	
 	private function prepareOrder(){
 	if(empty($this->order)){
 			return '';
-		}
+		} 
 		$result='';
 		if(is_array($this->order)){
 			foreach($this->order as $value){
@@ -187,12 +210,6 @@
 		
 	}
 	
-	
-	
-	
-	
-	
-	
 	private function getTableName(){
 		$result='';
 		if(is_array($this->tableName)){
@@ -210,9 +227,7 @@
 		}
 		return $result;
 	}
-	
-	
-	
+
 	private function getJoinTableName(){
 		$result='';
 		if(is_array($this->joinTableName)){

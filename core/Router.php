@@ -7,11 +7,14 @@ class Router
     private $routingMap;
 
     private $requestPatch;
+	
+	private $query;
 
     public function __construct()
     {
         $this->routingMap = include_once '../app/Config/Conf.php';
         $this->requestPatch = $_SERVER['PATH_INFO'] ?? '/';
+		parse_str($_SERVER['QUERY_STRING'],$this->query);
     }
 
     public function run()
@@ -26,7 +29,8 @@ class Router
             $classNamespace = 'App\\Controllers\\NotFoundController';
         }
 
+		$action = $this->query['action'] ?? 'index';
         $classObj = new $classNamespace();
-        $classObj->index();
+        $classObj->$action();
     }
 }

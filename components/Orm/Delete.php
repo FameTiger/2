@@ -2,7 +2,7 @@
 
  namespace Components\Orm;
 	
- class Update
+ class Delete
  {
 	 protected $condition;
 	 protected $type;

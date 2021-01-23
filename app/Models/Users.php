@@ -23,14 +23,29 @@ class Users extends Model
         $this->attributes = $name;
     }
 	
-	public function all()
+	public function validate($data)
 	{
-		//$this->select()->from($this->tableName)->execute();
-		//return $select->execute();
-		//
-		$select = new Select;
-		$select->from($this->tableName);
-		//var_export($select->getSqlString());
-		return $select->execute();
+		if(empty($data['First_name']))
+		{
+			return 'Имя не указано';
+		}
+		if(empty($data['Second_name']))
+		{
+			return 'Увувуув!';
+		}
+		if (!filter_var($data['E_mail'], FILTER_VALIDATE_EMAIL))
+		{
+			return 'Email указан неверно';
+		}
+		if(isset($data['Pass']) && empty($data['Pass']))
+		{
+			return 'Введите пароль';
+		}
+		$permissions = new UserPermissions();
+		if (empty($data['ID_user_permission']) || is_null($permissions->find($data['ID_user_permission'])))
+		{
+			return 'Неверный ID';
+		}
+		return true;
 	}
 }

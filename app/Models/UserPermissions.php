@@ -4,6 +4,7 @@ namespace App\Models;
 
 class UserPermissions extends Model
 {
+	protected $tableName = 'user_permission';
     private $attributes = ['12', '13', '14'];
 
     public function getAttributes(): array

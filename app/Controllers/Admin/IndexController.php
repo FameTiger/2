@@ -10,4 +10,5 @@ class IndexController extends Controller
     {
         $this->generate('Admin', 'Home');
     }
+	
 }

@@ -9,5 +9,10 @@
 </ul>
 
 <?php
+if(!empty($data['error'])):
+?>
+<div> Ошибочка: <?=$data['error']?></div> 
+<?php 
+endif;
 require 'Admin/' . $page . '.php';
 ?>

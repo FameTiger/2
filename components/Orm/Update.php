@@ -29,7 +29,7 @@
 		return $this; 
 	}
 	
-	private function createSql():string
+	public function createSql():string
 	{
 		return ' UPDATE '.
 		$this->prepareTableName().' '.
@@ -48,7 +48,7 @@
 		$result='';
 		if(is_array($this->columns)){
 			foreach($this->columns as $key=>$value){
-					$piece = $value . ' = '. $this->values[$key];
+					$piece = $value . ' = \''.($this->values[$key]).'\'';
 				if (empty($result))
 				{
 					$result = $piece;

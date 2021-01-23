@@ -1,6 +1,6 @@
 <?php
 
-namespace Components\Orm
+namespace Components\Orm;
 class Where
 {
 	
@@ -10,17 +10,17 @@ class Where
 	
 	protected $condition;
 	
-	public function where($condition);
+	public function __construct($condition)
 	{
-		$this->condition = $condition
+		$this->condition = $condition;
 	}
 	
 	
-	public function getWhere($type = self::AND_CONDITION)
+	public function where($type = self::AND_CONDITION)
 	{
 		$result;
 		
-		if (is_array($this->condition){
+		if (is_array($this->condition)) {
 			foreach ($this->condition as $column => $condition) {
 				if (empty($result)){
 					$result = $column . '=' . $condition;

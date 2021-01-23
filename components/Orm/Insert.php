@@ -21,7 +21,7 @@
 		return $this; 
 	}
 	
-	private function createSql():string
+	public function createSql():string
 	{
 		return 'INSERT INTO '.
 		$this->prepareTableName().' ('.
@@ -57,7 +57,7 @@
 		$result='';
 		if(is_array($this->values)){
 			foreach($this->values as $value){
-					$piece = $value;
+					$piece = '\''.($value).'\'';
 				if (empty($result))
 				{
 					$result = $piece;

@@ -1,10 +1,10 @@
 <?php
 
 return[
-	'/' => 'index',
-	'/about' => 'About',
-	'/gallery' => 'Gallery',
-    '/admin/' => 'index',
-	'/admin/user-permissions' => 'UserPermissions',
-	'/admin/users' => 'Users',
-];
+	'index' => 'index',
+	'about' => 'About',
+	'gallery' => 'Gallery',
+    'admin/index' => 'index',
+	'admin/user-permissions' => 'UserPermissions',
+	'admin/users' => 'Users',
+	];

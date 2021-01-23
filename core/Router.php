@@ -19,31 +19,21 @@ class Router
 
     public function run()
     {
-
-        if(in_array($this->requestPatch, array_keys ($this->routingMap))) {
-            if (strpos($this->requestPatch, '/admin') === 0) {
-                $classNamespace = 'App\\Controllers\\Admin\\' . $this->routingMap[$this->requestPatch] . 'Controller';
-            } else {
-                $classNamespace = 'App\\Controllers\\Home\\' . $this->routingMap[$this->requestPatch] . 'Controller';
-            }
-        } else {
-            $classNamespace = 'App\\Controllers\\NotFoundController';
-        }
-        
+        $classNamespace = 'App\\Controllers\\NotFoundController';
         $action = 'index';
         $requestParts = explode('/', $this->requestPatch);
         if (strpos($this->requestPatch, '/admin') === 0) {
             if (isset($requestParts[3])) {
                 $action = $requestParts[3];
             }
+			$classNamespace = 'App\\Controllers\\Admin\\' . $this->routingMap[$requestParts[1].'/'.($requestParts[2]?:'index')] . 'Controller';
         } else {
             if (isset($requestParts[2])) {
                 $action = $requestParts[2];
             }
+			$classNamespace = 'App\\Controllers\\Home\\' . $this->routingMap[$requestParts[1]?:'index'] . 'Controller';
         }
-
         $classObj = new $classNamespace();
-        
         if (method_exists($classObj, $action)) {
             $classObj->$action($this->query);
         } else {

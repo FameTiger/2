@@ -13,4 +13,21 @@ class UserPermissionsController extends Controller
         $data = $model->getAttributes();
         $this->generate('Admin', 'UserPermissions', $data);
     }
+	
+	
+	public function remove(array $data)
+	{
+		try{
+			if(!empty($data['id'])){
+				$id = (int) $data ['id'];
+				$permissions = new UserPermissions();
+				echo "Removing permission [id = $id]";
+				$permissions->remove($id);
+			}
+			header ('Location: /admin/user-permissions');
+	
+		}catch (\Exeption $e){
+		$e->message();
+		}
+	}
 }
